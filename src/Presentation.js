@@ -1,5 +1,6 @@
 // Import React
 import React from 'react';
+import styled from '@emotion/styled';
 
 // Import Spectacle Core tags
 import {
@@ -43,17 +44,23 @@ require('./Presentation.css');
 require('./prism.css');
 
 export default class Presentation extends React.Component {
-
   componentDidMount() {
-    window.addEventListener('resize', this.forceUpdate)
+    const component = this;
+
+    function resizer() {
+      component.forceUpdate();
+    }
+
+    this.setState({ resizer : resizer });
+    window.addEventListener('resize', resizer)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.forceUpdate)
+    window.removeEventListener('resize', this.state.resizer)
   }
 
   render() {
-    const contentWidth = 2 * innerWidth / 5;
+    const contentWidth = Math.round(.6 * innerWidth);
     const contentHeight = innerHeight / 2;
     const pinkRedBackground          = (<SlideBackground gradient={<GradientPinkRed id="GradientPinkRed" />} gradientId="GradientPinkRed"/>);
     const redPinkBackground          = (<SlideBackground gradient={<LinearGradient from={'#FF7676'} to={'#F54EA2'}id="GradientRedPink" />} gradientId="GradientRedPink"/>);
@@ -106,7 +113,7 @@ export default class Presentation extends React.Component {
             {redPinkBackground}
             <Layout>
               <Fill>
-                <Heading size={4} caps textColor="primary" margin={10} fit={true}>
+                <Heading size={4} caps textColor="primary" margin={10}>
                   About Me
                 </Heading>
                 <div><br/></div>
@@ -115,29 +122,29 @@ export default class Presentation extends React.Component {
                     <Heading size={5} caps textColor="secondary" margin={10} fit={true}>
                       juan narvaez
                     </Heading>
-                    <Heading size={5} caps textColor="quaternary" margin={10}>
+                    <Heading size={5} caps textColor="quaternary" margin={10} fit={true}>
                       lead software engineer
                     </Heading>
                   </div>
                 </Appear>
                 <div><br/></div>
                 <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
                     Started at Cerner out of graduate school
                   </Heading>
                 </Appear>
                 <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
                     Worked on diagnostic and referential imaging solutions for 6 years
                   </Heading>
                 </Appear>
                 <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
                     Moved to Apple to work on the Transit project
                   </Heading>
                 </Appear>
                 <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
                     4 years later came back to Cerner to work on medical imaging
                   </Heading>
                 </Appear>
@@ -337,6 +344,71 @@ export default class Presentation extends React.Component {
                     30+ FPS video
                   </Heading>
                 </Appear>
+              </Fill>
+            </Layout>
+          </Slide>
+
+          <Slide transition={['fade', 'slide']}>
+            {redPinkBackground}
+            <Layout>
+              <Fill>
+                <Heading size={5} caps textColor="primary" margin={10}>
+                  sounds like a lot of
+                </Heading>
+                <Heading size={6} caps textColor="secondary" margin={10} fit={true}>
+                  work
+                </Heading>
+                <Heading size={5} caps textColor="primary" margin={10}>
+                  right?
+                </Heading>
+              </Fill>
+            </Layout>
+          </Slide>
+
+          <Slide transition={['slide', 'fade']}>
+            {pinkRedBackground}
+            <Layout>
+              <Fill>
+                <Heading size={4} textColor="primary" margin={20} caps>
+                  start with less configuration
+                </Heading>
+                <Appear>
+                  <Heading size={5} textColor="secondary" margin={20} caps fit={true}>
+                    basic functionality
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={4} textColor="primary" margin={20} caps>
+                    prune the list of features
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={5} textColor="secondary" margin={20} caps fit={true}>
+                    make everything reusable
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={4} textColor="primary" margin={20} caps>
+                    even requirements
+                  </Heading>
+                </Appear>
+              </Fill>
+            </Layout>
+          </Slide>
+
+          <Slide transition={['slide', 'fade']}>
+            {orangeRedBackground}
+            <Layout>
+              <Fill>
+                <Heading size={5} caps textColor="primary" margin={10}>
+                  use this as an
+                </Heading>
+                <Heading size={6} caps textColor="secondary" margin={10} fit={true}>
+                  opportunity
+                </Heading>
+                <Heading size={5} caps textColor="primary" margin={10}>
+                  to streamline and prioritize the solution
+                </Heading>
               </Fill>
             </Layout>
           </Slide>
@@ -574,7 +646,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide transition={['fade']} align={'center flex-start'}>
             {redPinkBackground}
             <Layout>
               <Fill>
@@ -677,7 +749,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['slide', 'fade']}>
+          <Slide transition={['slide', 'fade']} align={'center flex-start'}>
             {orangeRedBackground}
             <Layout>
               <Fill>
@@ -718,7 +790,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['slide', 'fade']}>
+          <Slide transition={['slide', 'fade']} align={'center flex-start'}>
             {lightGreenGreenBackground}
             <Layout>
               <Fill>
@@ -817,9 +889,9 @@ export default class Presentation extends React.Component {
             lang="js"
             code={require("raw-loader!./code/test-harness.js").default}
             ranges={[
-              { loc: [0, 61], title: "Anatomy of an automated test" },
-              { loc: [2, 4], title: "Require some things" },
-              { loc: [4, 5], title: "Describe our test" },
+              { loc: [0, 61], title: "Anatomy of an automated test", note : 'boy this looks human readable' },
+              { loc: [2, 4], title: "Require some things", note : 'what are all these neat symbols' },
+              { loc: [4, 5], title: "Describe our test", note : 'super descriptive' },
               { loc: [5, 27], title: "Run an 'it'", note : 'what exactly is an it?' }
             ]}/>
 
@@ -875,7 +947,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide transition={['fade']} align={'center flex-start'}>
             {lightGreenGreenBackground}
             <Layout>
               <Fill>
@@ -910,7 +982,7 @@ export default class Presentation extends React.Component {
                       write plugins and extensions
                     </Heading>
                     <Heading size={5} caps textColor="secondary" margin={30}>
-                      that allow all contributors and consumers to read the test
+                      that allow all contributors and consumers to read and understand the test and what is being tested
                     </Heading>
                   </div>
                 </Appear>
@@ -984,7 +1056,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade', 'slide']}>
+          <Slide transition={['fade', 'slide']} align={'center flex-start'}>
             {pinkRedBackground}
             <Layout>
               <Fill>

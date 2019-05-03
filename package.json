@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
     "@vx/gradient": "0.0.183",
     "@vx/group": "0.0.183",
     "@vx/shape": "0.0.184",
