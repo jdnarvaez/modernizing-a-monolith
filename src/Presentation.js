@@ -43,12 +43,25 @@ require('normalize.css');
 require('./Presentation.css');
 require('./prism.css');
 
+// const ratio = 1.778;
+const ratio = 1.2;
+
 export default class Presentation extends React.Component {
+  componentWillMount() {
+    const height = Math.round(innerHeight);
+    // const width = Math.round(height / ratio);
+    const width = Math.round(.7 * innerWidth);
+    this.setState({ contentHeight : height, contentWidth : width });
+  }
+
   componentDidMount() {
     const component = this;
 
     function resizer() {
-      component.forceUpdate();
+      const height = Math.round(innerHeight);
+      // const width = Math.round(height / ratio);
+      const width = Math.round(.7 * innerWidth);
+      component.setState({ contentHeight : height, contentWidth : width });
     }
 
     this.setState({ resizer : resizer });
@@ -60,8 +73,8 @@ export default class Presentation extends React.Component {
   }
 
   render() {
-    const contentWidth = Math.round(.6 * innerWidth);
-    const contentHeight = innerHeight / 2;
+    const component = this;
+    const { contentHeight, contentWidth } = this.state;
     const pinkRedBackground          = (<SlideBackground gradient={<GradientPinkRed id="GradientPinkRed" />} gradientId="GradientPinkRed"/>);
     const redPinkBackground          = (<SlideBackground gradient={<LinearGradient from={'#FF7676'} to={'#F54EA2'}id="GradientRedPink" />} gradientId="GradientRedPink"/>);
     const lightGreenGreenBackground  = (<SlideBackground gradient={<GradientLightgreenGreen id="GradientLightgreenGreen" />} gradientId="GradientLightgreenGreen"/>);
@@ -109,49 +122,6 @@ export default class Presentation extends React.Component {
             </svg>
           </Slide>
 
-          <Slide transition={['fade']}>
-            {redPinkBackground}
-            <Layout>
-              <Fill>
-                <Heading size={4} caps textColor="primary" margin={10}>
-                  About Me
-                </Heading>
-                <div><br/></div>
-                <Appear>
-                  <div>
-                    <Heading size={5} caps textColor="secondary" margin={10} fit={true}>
-                      juan narvaez
-                    </Heading>
-                    <Heading size={5} caps textColor="quaternary" margin={10} fit={true}>
-                      lead software engineer
-                    </Heading>
-                  </div>
-                </Appear>
-                <div><br/></div>
-                <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
-                    Started at Cerner out of graduate school
-                  </Heading>
-                </Appear>
-                <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
-                    Worked on diagnostic and referential imaging solutions for 6 years
-                  </Heading>
-                </Appear>
-                <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
-                    Moved to Apple to work on the Transit project
-                  </Heading>
-                </Appear>
-                <Appear>
-                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
-                    4 years later came back to Cerner to work on medical imaging
-                  </Heading>
-                </Appear>
-              </Fill>
-            </Layout>
-          </Slide>
-
           <Slide transition={['slide']}>
             {orangeRedBackground}
             <Layout>
@@ -193,6 +163,49 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
+          <Slide transition={['fade']}>
+            {redPinkBackground}
+            <Layout>
+              <Fill>
+                <Heading size={4} caps textColor="primary" margin={10}>
+                  About Me
+                </Heading>
+                <div><br/></div>
+                <Appear>
+                  <div>
+                    <Heading size={3} caps textColor="secondary" margin={10} fit={true}>
+                      juan narvaez
+                    </Heading>
+                    <Heading size={2} caps textColor="quaternary" margin={10} fit={true}>
+                      lead software engineer
+                    </Heading>
+                  </div>
+                </Appear>
+                <div><br/></div>
+                <Appear>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
+                    Started at Cerner out of graduate school
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
+                    Worked on diagnostic and referential imaging solutions for 6 years
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
+                    Moved to Apple to work on the Transit project
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={6} textColor="primary" margin={20} caps fit={true}>
+                    4 years later came back to Cerner to work on medical imaging
+                  </Heading>
+                </Appear>
+              </Fill>
+            </Layout>
+          </Slide>
+
           <Slide transition={['slide']}>
             {lightGreenGreenBackground}
             <Layout>
@@ -225,36 +238,6 @@ export default class Presentation extends React.Component {
                   <Heading size={6} textColor="primary" margin={20} caps>
                     run on high performance workstations
                   </Heading>
-                  <div>
-                  <svg version="1.1" x="0px" y="0px" viewBox="0 0 444.462 444.462" style={{ fill : Theme.screen.colors.primary, transform : 'scale(.25) translate(0, -150%)' }}>
-                  <g>
-                    <path d="M317.166,119.796H127.297c-4.143,0-7.5,3.358-7.5,7.5v189.869c0,4.142,3.357,7.5,7.5,7.5h189.869
-                      c4.143,0,7.5-3.358,7.5-7.5V127.296C324.666,123.154,321.309,119.796,317.166,119.796z M309.666,309.666H134.797V134.796h174.869
-                      V309.666z"/>
-                    <path d="M185.887,266.076h72.689c4.143,0,7.5-3.358,7.5-7.5v-72.689c0-4.142-3.357-7.5-7.5-7.5h-72.689c-4.143,0-7.5,3.358-7.5,7.5
-                      v72.689C178.387,262.718,181.744,266.076,185.887,266.076z M193.387,193.386h57.689v57.689h-57.689V193.386z"/>
-                    <path d="M305.524,15c6.96,0,10.082-9.068,4.637-13.389c-5.408-4.292-13.535,0.832-11.948,7.579
-                      C299.004,12.547,302.068,15,305.524,15z"/>
-                    <path d="M143.104,430.73c-2.454-1.616-5.649-1.661-8.146-0.113c-2.891,1.792-4.211,5.471-3.135,8.698
-                      c0.978,2.93,3.715,5.015,6.809,5.138c3.191,0.127,6.143-1.826,7.299-4.794C147.185,436.437,146,432.636,143.104,430.73z"/>
-                    <path d="M436.962,188.086c4.143,0,7.5-3.358,7.5-7.5s-3.357-7.5-7.5-7.5h-82.296v-26.645h82.296c4.143,0,7.5-3.358,7.5-7.5
-                      s-3.357-7.5-7.5-7.5h-82.296v-5.392c0-19.99-16.264-36.253-36.254-36.253h-5.392V31.6c0-4.142-3.357-7.5-7.5-7.5
-                      s-7.5,3.358-7.5,7.5v58.196h-26.645V7.5c0-4.142-3.357-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v82.296h-26.645V7.5
-                      c0-4.142-3.357-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v82.296h-26.646V7.5c0-4.142-3.357-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v82.296h-26.645
-                      V7.5c0-4.142-3.357-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v82.296h-5.392c-19.99,0-36.253,16.263-36.253,36.253v5.392H7.5
-                      c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h82.297v26.645H7.5c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h82.297v26.645H7.5
-                      c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h82.297v26.645H7.5c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h82.297v26.645H7.5
-                      c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h82.297v5.392c0,19.99,16.263,36.253,36.253,36.253h5.392v58.197
-                      c0,4.142,3.357,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-58.197h26.645v82.296c0,4.142,3.357,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-82.296h26.646
-                      v82.296c0,4.142,3.357,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-82.296h26.645v82.296c0,4.142,3.357,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-82.296
-                      h26.645v82.296c0,4.142,3.357,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-82.296h5.392c19.99,0,36.254-16.263,36.254-36.253v-5.392h82.296
-                      c4.143,0,7.5-3.358,7.5-7.5s-3.357-7.5-7.5-7.5h-82.296v-26.645h82.296c4.143,0,7.5-3.358,7.5-7.5s-3.357-7.5-7.5-7.5h-82.296
-                      v-26.645h82.296c4.143,0,7.5-3.358,7.5-7.5s-3.357-7.5-7.5-7.5h-82.296v-26.645H436.962z M339.666,318.412
-                      c0,11.719-9.534,21.253-21.254,21.253H126.05c-11.719,0-21.253-9.534-21.253-21.253V126.05c0-11.719,9.534-21.253,21.253-21.253
-                      h192.362c11.72,0,21.254,9.534,21.254,21.253V318.412z"/>
-                  </g>
-                  </svg>
-                  </div>
                   </div>
                 </Appear>
               </Fill>
@@ -646,17 +629,17 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']} align={'center flex-start'}>
+          <Slide transition={['fade']}>
             {redPinkBackground}
             <Layout>
               <Fill>
-                <Heading size={5} caps textColor="primary" margin={10} fit={true}>
+                <Heading size={4} caps textColor="primary" margin={10} >
                   let's just render
                 </Heading>
-                <Heading size={6} caps textColor="secondary" margin={10} fit={true}>
-                  one
+                <Heading size={5} caps textColor="secondary" margin={10}fit={true} >
+                  &nbsp;one&nbsp;
                 </Heading>
-                <Heading size={5} caps textColor="primary" margin={10} fit={true}>
+                <Heading size={4} caps textColor="primary" margin={10}>
                   image
                 </Heading>
               </Fill>
@@ -667,8 +650,8 @@ export default class Presentation extends React.Component {
             {redPinkBackground}
             <Layout>
               <Fill>
-                <Heading size={6} textColor="secondary" margin={20} caps>
-                  (outside of the normalized data model)
+                <Heading size={5} textColor="secondary" margin={20} caps>
+                  not the normalized data model
                 </Heading>
                 <Appear>
                   <Heading size={6} textColor="primary" margin={20} caps>
@@ -749,7 +732,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['slide', 'fade']} align={'center flex-start'}>
+          <Slide transition={['slide', 'fade']}>
             {orangeRedBackground}
             <Layout>
               <Fill>
@@ -762,16 +745,20 @@ export default class Presentation extends React.Component {
                 <Heading size={5} caps textColor="primary" margin={10} fit={true}>
                   the building blocks as we go
                 </Heading>
-                <Appear>
-                  <div>
-                    <Heading size={5} caps textColor="primary" margin={25}>
-                      let's automate
-                    </Heading>
-                    <Heading size={5} caps textColor="secondary" margin={25} fit={true}>
-                      everything!
-                    </Heading>
-                  </div>
-                </Appear>
+              </Fill>
+            </Layout>
+          </Slide>
+
+          <Slide transition={['slide', 'fade']}>
+            {orangeRedBackground}
+            <Layout>
+              <Fill>
+                <Heading size={5} caps textColor="primary" margin={25}>
+                  let's automate
+                </Heading>
+                <Heading size={5} caps textColor="secondary" margin={25} fit={true}>
+                  everything!
+                </Heading>
               </Fill>
             </Layout>
           </Slide>
@@ -790,7 +777,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['slide', 'fade']} align={'center flex-start'}>
+          <Slide transition={['slide', 'fade']}>
             {lightGreenGreenBackground}
             <Layout>
               <Fill>
@@ -812,11 +799,17 @@ export default class Presentation extends React.Component {
                     are you noticing a theme?
                   </Heading>
                 </Appear>
-                <Appear>
-                  <Heading size={5} caps textColor="quaternary" margin={10}>
-                    load application
-                  </Heading>
-                </Appear>
+              </Fill>
+            </Layout>
+          </Slide>
+
+          <Slide transition={['slide', 'fade']}>
+            {lightGreenGreenBackground}
+            <Layout>
+              <Fill>
+                <Heading size={5} caps textColor="quaternary" margin={10}>
+                  load application
+                </Heading>
                 <Appear>
                   <Heading size={5} caps textColor="quaternary" margin={10}>
                     perform login
@@ -884,6 +877,8 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <CodeSlide
+            className="code-slide"
+            onActive={(e) => { component.setState({ contentWidth : Math.round(.85 * innerWidth), savedWidth : component.state.contentWidth }) }}
             bgColor={'rgb(30, 30, 30)'}
             transition={['slide', 'fade']}
             lang="js"
@@ -895,14 +890,14 @@ export default class Presentation extends React.Component {
               { loc: [5, 27], title: "Run an 'it'", note : 'what exactly is an it?' }
             ]}/>
 
-          <Slide transition={['fade', 'slide']}>
+          <Slide transition={['fade', 'slide']} onActive={(e) => { component.setState({ contentWidth : component.state.savedWidth }) }}>
             {redPinkBackground}
             <Layout>
               <Fill>
                 <Heading size={4} caps textColor="primary" margin={10}>
                   reading code often isn't
                 </Heading>
-                <Heading caps textColor="secondary" margin={10} fit={true}>
+                <Heading caps textColor="secondary" margin={10}>
                   fun
                 </Heading>
                 <Heading size={6} caps textColor="primary" margin={10}>
@@ -947,17 +942,17 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']} align={'center flex-start'}>
+          <Slide transition={['fade']}>
             {lightGreenGreenBackground}
             <Layout>
               <Fill>
-                <Heading size={6} caps textColor="primary" margin={10} fit={true}>
+                <Heading size={1} caps textColor="primary" margin={10}>
                   step
                 </Heading>
                 <Heading size={5} caps textColor="secondary" margin={10}>
                   by
                 </Heading>
-                <Heading size={6} caps textColor="primary" margin={10} fit={true}>
+                <Heading size={1} caps textColor="primary" margin={10}>
                   step
                 </Heading>
               </Fill>
@@ -977,20 +972,27 @@ export default class Presentation extends React.Component {
                   </Heading>
                 </Appear>
                 <Appear>
-                  <div>
-                    <Heading size={5} caps textColor="primary" margin={10} fit={true}>
-                      write plugins and extensions
-                    </Heading>
-                    <Heading size={5} caps textColor="secondary" margin={30}>
-                      that allow all contributors and consumers to read and understand the test and what is being tested
-                    </Heading>
-                  </div>
+                  <Heading size={5} caps textColor="primary" margin={10} fit={true}>
+                    write plugins and extensions
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={5} caps textColor="secondary" margin={30}>
+                    shared nomenclature
+                  </Heading>
+                </Appear>
+                <Appear>
+                  <Heading size={5} caps textColor="primary" margin={30}>
+                    allows contributors & consumers to understand each other
+                  </Heading>
                 </Appear>
               </Fill>
             </Layout>
           </Slide>
 
           <CodeSlide
+          className="code-slide"
+            onActive={(e) => { component.setState({ contentWidth : Math.round(.85 * innerWidth), savedWidth : component.state.contentWidth }) }}
             bgColor={'rgb(30, 30, 30)'}
             transition={['slide', 'fade']}
             lang="js"
@@ -1015,25 +1017,25 @@ export default class Presentation extends React.Component {
             ]}>
           </CodeSlide>
 
-          <Slide transition={['slide', 'fade']}>
+          <Slide transition={['slide', 'fade']} onActive={(e) => { component.setState({ contentWidth : component.state.savedWidth }) }}>
             {lightGreenGreenBackground}
             <Layout>
               <Fill>
-                <Heading size={5} caps textColor="primary" margin={10} fit={true}>
+                <Heading size={5} caps textColor="primary" margin={10}>
                   test helper methods are our building blocks
                 </Heading>
                 <Appear>
-                  <Heading size={5} caps textColor="secondary" margin={10} fit={true}>
+                  <Heading size={5} caps textColor="secondary" margin={10}>
                     load a study
                   </Heading>
                 </Appear>
                 <Appear>
-                  <Heading size={5} caps textColor="primary" margin={10} fit={true}>
+                  <Heading size={5} caps textColor="primary" margin={10}>
                     load a series
                   </Heading>
                 </Appear>
                 <Appear>
-                  <Heading size={5} caps textColor="secondary" margin={10} fit={true}>
+                  <Heading size={5} caps textColor="secondary" margin={10}>
                     do some specific interaction
                   </Heading>
                 </Appear>
@@ -1056,7 +1058,7 @@ export default class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade', 'slide']} align={'center flex-start'}>
+          <Slide transition={['fade', 'slide']}>
             {pinkRedBackground}
             <Layout>
               <Fill>
@@ -1088,6 +1090,14 @@ export default class Presentation extends React.Component {
                     implement the component
                   </Heading>
                 </Appear>
+              </Fill>
+            </Layout>
+          </Slide>
+
+          <Slide transition={['fade', 'slide']}>
+            {pinkRedBackground}
+            <Layout>
+              <Fill>
                 <Appear>
                   <Heading size={4} caps textColor="secondary" margin={20}>
                     implement the test
@@ -1140,12 +1150,6 @@ export default class Presentation extends React.Component {
               <img style={{ objectFit: 'contain', width : `${innerWidth}px`, height : `${innerHeight}px` }} src={require('./images/imgviewer.png')}/>
             </div>
           </Slide>
-
-
-
-
-
-
 
           <Slide transition={['fade', 'slide']}>
             {pinkRedBackground}
