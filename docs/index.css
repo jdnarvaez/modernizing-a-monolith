@@ -396,7 +396,8 @@ template {
 [hidden] {
   display: none; }
 
-
+.code-slide > h1 {
+  font-size: 1.5em !important; }
 
 /**
 * xonokai theme for JavaScript, CSS and HTML

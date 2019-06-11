@@ -1187,7 +1187,14 @@ export default class Presentation extends React.Component {
                 <Heading size={6} caps textColor="primary" margin={10}>
                   juan.narvaez@cerner.com
                 </Heading>
-                <div><br/><br/><br/><br/></div>
+                <br/>
+                <Heading fit={true} caps textColor="secondary" margin={40}>
+                  https://jdnarvaez.github.io/modernizing-a-monolith
+                </Heading>
+                <Heading fit={true} caps textColor="secondary" margin={40}>
+                  https://github.com/jdnarvaez/modernizing-a-monolith
+                </Heading>
+                <div><br/><br/></div>
                 <Heading size={6} caps textColor="quaternary" fit={true}>
                   made with react, @vx, and spectacle
                 </Heading>
